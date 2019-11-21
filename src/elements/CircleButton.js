@@ -1,7 +1,21 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import * as Font from 'expo-font';
+import fontawesome from '../../assets/fonts/fa-solid-900.ttf';
 
 class CircleButton extends React.Component {
+    state = {
+        fontLoaded: false,
+    };
+    //コンポーネントが読み込まれたら、、
+    async componentDidMount() {
+        await Font.loadAsync({
+            FontAwesome: fontawesome,
+        });
+
+        this.setState({ fontLoaded: true });
+    }
+
     render() {
         //スタイルをpropsでもってきて、それで上書きカスタマイズするということ。
         const { style, color } = this.props;
@@ -17,9 +31,13 @@ class CircleButton extends React.Component {
         return (
             //配列形式で入れる、第一引数優先、それ以降は差分を見てる？？
             <View style={[styles.circleButton, style, { backgroundColor: bgColor }]}>
-                <Text style={[styles.circleButtonTitle, { color: textColor }]}>
-                    {this.props.children}
-                </Text>
+                {
+                    this.state.fontLoaded ? (
+                        <Text style={[styles.circleButtonTitle, { color: textColor }]}>
+                            {this.props.children}
+                        </Text>
+                    ) : null
+                }
             </View>
         );
     }
@@ -42,9 +60,10 @@ const styles = StyleSheet.create({
         shadowRadius: 3,
     },
     circleButtonTitle: {
-        fontSize: 32,
-        lineHeight: 32,
-        color: '#fff',
+        fontFamily: 'FontAwesome',
+        fontSize: 24,
+        //なんかfontfamilyでttf指定すると、位置や太さが変わった。が、プラスもフォントにしたった
+        lineHeight: 36,
     },
 });
 
