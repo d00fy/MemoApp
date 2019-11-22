@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, } from 'react-native';
+import { StyleSheet, View, TouchableHighlight } from 'react-native';
 import * as Font from 'expo-font';
 import fontawesome from '../../assets/fonts/fa-solid-900.ttf';
 import { createIconSet } from '@expo/vector-icons';
@@ -25,7 +25,7 @@ class CircleButton extends React.Component {
 
     render() {
         //スタイルをpropsでもってきて、それで上書きカスタマイズするということ。
-        const { style, color, name } = this.props;
+        const { style, color, name, onPress } = this.props;
 
         let bgColor = '#E31676';
         let textColor = '#fff';
@@ -37,23 +37,28 @@ class CircleButton extends React.Component {
 
         return (
             //配列形式で入れる、第一引数優先、それ以降は差分を見てる？？
-            <View style={[styles.circleButton, style, { backgroundColor: bgColor }]}>
-                {
-                    this.state.fontLoaded ? (
-                        <CustomIcon name={name} style={[styles.circleButtonTitle, { color: textColor }]} />
-                    ) : null
-                }
-            </View>
+            <TouchableHighlight style={[styles.container, style]} onPress={onPress} underlayColor="tranceparent">
+                <View style={[styles.circleButton, { backgroundColor: bgColor }]}>
+                    {
+                        this.state.fontLoaded ? (
+                            <CustomIcon name={name} style={[styles.circleButtonTitle, { color: textColor }]} />
+                        ) : null
+                    }
+                </View>
+            </TouchableHighlight>
         );
     }
 }
 
 const styles = StyleSheet.create({
-
-    circleButton: {
+    container: {
         position: 'absolute',
         bottom: 32,
         right: 32,
+        width: 48,
+        height: 48,
+    },
+    circleButton: {
         width: 48,
         height: 48,
         borderRadius: 24,

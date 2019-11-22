@@ -1,26 +1,31 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Button, View, Text } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
-import Appbar from './src/components/Appbar';
-import MemoDetailScreen from './src/screens/LoginScreen';
+import MemoListScreen from './src/screens/MemoListScreen';
+import MemoDetailScreen from './src/screens/MemoDetailScreen';
+import MemoEditScreen from './src/screens/MemoEditScreen';
+import MemoLoginScreen from './src/screens/LoginScreen';
+import MemoSignupScreen from './src/screens/SignupScreen';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Appbar />
-      <MemoDetailScreen />
-    </View >
-  );
-}
+const AppNavigator = createStackNavigator({
+  Home: { screen: MemoListScreen },
+  MemoDetail: { screen: MemoDetailScreen },
+  MemoEdit: { screen: MemoEditScreen },
+  Login: { screen: MemoLoginScreen },
+  Signup: { screen: MemoSignupScreen },
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFFDF6',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 78,
+}, {
+  defaultNavigationOptions: {
+    headerTitle: 'MemoApp',
+    headerStyle: {
+      backgroundColor: '#265366',
+    },
+    headerTitleStyle: {
+      color: '#fff',
+    },
   },
 });
 
-//shadowが効いてない気がする。
+export default createAppContainer(AppNavigator);
