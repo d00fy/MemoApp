@@ -5,17 +5,21 @@ import { createStackNavigator } from 'react-navigation-stack';
 import firebase from 'firebase';
 import ENV from './env.json';
 
+require("firebase/firestore");
+
 import MemoListScreen from './src/screens/MemoListScreen';
 import MemoDetailScreen from './src/screens/MemoDetailScreen';
 import MemoEditScreen from './src/screens/MemoEditScreen';
 import MemoLoginScreen from './src/screens/LoginScreen';
 import MemoSignupScreen from './src/screens/SignupScreen';
+import MemoCreateScreen from './src/screens/MemoCreateScreen.js';
+
 
 const firebaseConfig = {
   apiKey: ENV.FIREBASE_API_KEY,
   authDomain: ENV.FIREBASE_AUTH_DOMAIN,
   databaseURL: ENV.FIREBASE_DB_URL,
-  projectId: ENV.FIREBASE_PRJ_URL,
+  projectId: ENV.FIREBASE_PRJ_ID,
   storageBucket: ENV.FIREBASE_STORAGE,
   messagingSenderId: ENV.FIREBASE_SENDER_ID,
   appId: ENV.FIREBASE_APP_ID,
@@ -31,6 +35,7 @@ const AppNavigator = createStackNavigator({
   Home: { screen: MemoListScreen },
   MemoDetail: { screen: MemoDetailScreen },
   MemoEdit: { screen: MemoEditScreen },
+  MemoCreate: { screen: MemoCreateScreen },
 
 }, {
   defaultNavigationOptions: {

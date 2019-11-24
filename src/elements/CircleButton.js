@@ -53,7 +53,8 @@ class CircleButton extends React.Component {
 const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        bottom: 32,
+        // bottom: 32,
+        bottom: 400,
         right: 32,
         width: 48,
         height: 48,
