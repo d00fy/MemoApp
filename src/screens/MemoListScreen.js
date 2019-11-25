@@ -10,13 +10,14 @@ class MemoListScreen extends React.Component {
         memoList: [],
     }
     componentWillMount() {
+
         const { currentUser } = firebase.auth();
         const db = firebase.firestore();
+        //db.settings({ timestampsInSnapshots: true });
         db.collection(`users/${currentUser.uid}/memos`).get()
             .then(snapshot => {
                 const memoList = [];//上のmemoListとは別物
                 snapshot.forEach(doc => {
-                    console.log(doc.data());
                     memoList.push({ ...doc.data(), key: doc.id });
                     //オブジェクトの追加合体記法
                 });
