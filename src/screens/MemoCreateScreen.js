@@ -14,6 +14,7 @@ class MemoCreateScreen extends React.Component {
         const { params } = this.props.navigation.state;
         console.log(params.currentUser.currentUser.user.uid);
         let uid = params.currentUser.currentUser.user.uid;
+        //実は const {currentUser} = firebase.auth(); でfirebaseから直に取得できる。
 
         const db = firebase.firestore();
         // db.settings({ timestampsInSnapshots: true });
