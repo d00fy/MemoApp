@@ -17,7 +17,8 @@ class MemoListScreen extends React.Component {
                 const memoList = [];//上のmemoListとは別物
                 snapshot.forEach(doc => {
                     console.log(doc.data());
-                    memoList.push(doc.data());
+                    memoList.push({ ...doc.data(), key: doc.id });
+                    //オブジェクトの追加合体記法
                 });
                 this.setState({ memoList }); //short hand
             })
